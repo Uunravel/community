@@ -21,6 +21,7 @@ public class ServiceLogAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(ServiceLogAspect.class);
 
+    // 织入点
     @Pointcut("execution(* com.nowcoder.community.service.*.*(..))")
     public void pointcut() {
 
