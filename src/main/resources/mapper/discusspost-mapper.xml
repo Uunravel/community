@@ -12,7 +12,8 @@
     </sql>
 
     <select id="selectDiscussPosts" resultType="DiscussPost">
-        select <include refid="selectFields"></include>
+        select
+        <include refid="selectFields"/>
         from discuss_post
         where status != 2
         <if test="userId!=0">
@@ -31,13 +32,14 @@
         </if>
     </select>
 
-    <insert id="insertDiscussPost" parameterType="DiscussPost">
-        insert into discuss_post(<include refid="insertFields"></include>)
+    <insert id="insertDiscussPost" parameterType="DiscussPost" keyProperty="id">
+        insert into discuss_post(<include refid="insertFields"/>)
         values(#{userId}, #{title}, #{content}, #{type}, #{status}, #{createTime}, #{commentCount}, #{score})
     </insert>
 
     <select id="selectDiscussPostById" parameterType="DiscussPost">
-        select <include refid="selectFields"></include>
+        select
+        <include refid="selectFields"/>
         from discuss_post
         where id = #{id}
     </select>
