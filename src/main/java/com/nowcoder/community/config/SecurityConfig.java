@@ -40,6 +40,10 @@ public class SecurityConfig implements CommunityConstant {
                                 AUTHORITY_USER,
                                 AUTHORITY_ADMIN,
                                 AUTHORITY_MODERATOR)
+                        .requestMatchers("/discuss/top", "/discuss/wonderful")
+                        .hasAnyAuthority(AUTHORITY_MODERATOR)
+                        .requestMatchers("/discuss/delete", "/data/**")
+                        .hasAnyAuthority(AUTHORITY_ADMIN)
                         .anyRequest().permitAll())
                 ;
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
@@ -52,7 +56,7 @@ public class SecurityConfig implements CommunityConstant {
                             public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
                                 String xRequestedWith = request.getHeader("x-requested-with");
                                 if("XMLHttpRequest".equals(xRequestedWith)) {  // 异步请求
-                                    response.setContentType("application/plain;charaset=utf-8");
+                                    response.setContentType("application/plain;charset=utf-8");
                                     PrintWriter writer = response.getWriter();
                                     writer.write(CommunityUtil.getJSONString(403, "您还没有登录!"));
                                 } else {
@@ -66,7 +70,7 @@ public class SecurityConfig implements CommunityConstant {
                             public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
                                 String xRequestedWith = request.getHeader("x-requested-with");
                                 if("XMLHttpRequest".equals(xRequestedWith)) {  // 异步请求, 返回JSON
-                                    response.setContentType("application/plain;charaset=utf-8");
+                                    response.setContentType("application/plain;charset=utf-8");
                                     PrintWriter writer = response.getWriter();
                                     writer.write(CommunityUtil.getJSONString(403, "您没有访问此功能的权限!"));
                                 } else {

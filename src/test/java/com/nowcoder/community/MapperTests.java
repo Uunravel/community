@@ -78,7 +78,7 @@ public class MapperTests {
 
     @Test
     public void testSelectPost(){  //  测试DisscussPostMapper接口的映射配置文件    测试数据库语句查询操作
-        List<DiscussPost> list = discussPostMapper.selectDiscussPosts(0,0,10);
+        List<DiscussPost> list = discussPostMapper.selectDiscussPosts(0,0,10, 0);
         for(DiscussPost post :list){
             System.out.println(post);
         }
