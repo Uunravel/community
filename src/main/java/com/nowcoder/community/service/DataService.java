@@ -21,7 +21,7 @@ public class DataService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    private SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+    private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     // 将指定IP计入UV
     public void recordUV(String ip) {

@@ -28,10 +28,10 @@ public class DiscussPostService {
     @Autowired
     private SensitiveFilter sensitiveFilter;
 
-    @Value("caffeine.posts.max-size")
+    @Value("${caffeine.posts.max-size}")
     private int maxSize;
 
-    @Value("caffeine.posts.expire-seconds")
+    @Value("${caffeine.posts.expire-seconds}")
     private int expireSeconds;
 
     // Caffeine核心接口：Cache，LoadingCache，AsyncLoadingCache
